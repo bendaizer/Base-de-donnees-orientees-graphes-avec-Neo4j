@@ -1,0 +1,50 @@
+<html>
+<head>
+	<style>
+    #container {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        position: absolute;
+        margin: 5%;
+    }
+    </style>
+</head>
+
+<body>
+	<div id="container"></div>
+    <script src="sigma.min.js"></script>
+    <script src="plugins/sigma.parsers.json.min.js"></script>
+    <script src="plugins/sigma.parsers.cypher/sigma.parsers.cypher.js"></script>
+    <script src="plugins/sigma.layout.forceAtlas2.min.js"></script>
+    <script>
+
+    sigma.neo4j.cypher(
+        {url: 'http://localhost:7474', user: 'user', password: 'pass' },
+        'MATCH (n)-[r]->(m) RETURN n,r,m LIMIT 100',
+        { container: 'container' } ,
+        function(s) {
+            s.graph.nodes().forEach(function(node){
+                node.label = node.neo4j_data.name;
+                node.color = node_color(node.neo4j_labels[0])
+                });
+            s.startForceAtlas2();
+            setTimeout(function() {s.stopForceAtlas2();},10000);
+            });
+
+    function node_color(neo4j_label) {
+        console.log(neo4j_label);
+        switch(neo4j_label){
+            case 'Manager':
+            return "#F66"
+            case 'Director':
+            return "#2F2"
+            case 'Salarie':
+            return "#000"
+        }
+    }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<html>
+<head>
+	<style>
+		#container {
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			position: absolute;
+		}
+	</style>
+</head>
+<body>
+	<div id="container"></div>
+
+<script src="sigma.min.js"></script>
+<script src="plugins/sigma.layout.forceAtlas2.min.js"></script>
+<script>
+var g = {
+	nodes: [
+		{"id":"A"},
+		{"id":"B"},
+		{"id":"C"},
+		{"id":"D"},
+		{"id":"E"}
+	],
+	edges: [
+		{
+	      "id": "e0",
+	      "source": "A",
+	      "target": "B"
+	    },
+	    {
+	      "id": "e1",
+	      "source": "B",
+	      "target": "C"
+	    },
+	    {
+	      "id": "e2",
+	      "source": "C",
+	      "target": "A"
+	    },
+	    {
+	      "id": "e3",
+	      "source": "C",
+	      "target": "D"
+	    },
+	    {
+	      "id": "e4",
+	      "source": "D",
+	      "target": "E"
+	    }
+    ]
+};
+
+g.nodes.forEach(function(node){
+    node.x = Math.random();
+    node.y = Math.random();
+    node.size = 2;
+})
+
+s = new sigma({
+	graph: g,
+	container: 'container',
+	settings: {
+		drawEdges: true,
+		defaultNodeColor: '#ec5148'
+	}
+});
+s.startForceAtlas2();
+setTimeout(function() {s.stopForceAtlas2();},5000);
+</script>
+</body>
+</html>

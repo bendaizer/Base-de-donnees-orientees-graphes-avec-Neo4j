@@ -1,0 +1,22 @@
+CREATE (user1:User {name:"Audrey", age:25})
+CREATE (user2:User {name:"Bertrand", age:27})
+CREATE (user3:User {name:"Imen", age:22})
+
+CREATE (item1:Item {item:"clavier"})-[:A_ACHETE]->(user3)
+CREATE (item2:Item {item:"ipad"})-[:A_ACHETE]->(user3)
+CREATE (item2)-[:A_ACHETE]->(user1)
+CREATE (item3:Item {item:"iphone"})-[:A_ACHETE]->(user1)
+CREATE (item4:Item {item:"casque"})-[:A_ACHETE]->(user1)
+CREATE (item3)-[:A_ACHETE]->(user2)
+CREATE (item4)-[:A_ACHETE]->(user2)
+
+CREATE (item1)-[:MARQUE]->(brand1:Brand {brand:"Logitech"})
+CREATE (item2)-[:MARQUE]->(brand2:Brand {brand:"Apple"})
+CREATE (item3)-[:MARQUE]->(brand2)
+
+CREATE (item1)-[:TAG]->(tag1:Tag {tag:"accessoire"})
+CREATE (item1)-[:TAG]->(tag2:Tag {tag:"blanc"})
+CREATE (item2)-[:TAG]->(tag2)
+CREATE (item2)-[:TAG]->(tag3:Tag {tag:"nomade"})
+CREATE (item3)-[:TAG]->(tag2)
+CREATE (item3)-[:TAG]->(tag3)
